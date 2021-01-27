@@ -1,0 +1,12 @@
+  - platform: min_max
+    name: "Iguana Master Temp"
+    type: mean
+    entity_ids:
+      - sensor.sonoff_iguana_sensor_aux
+      - sensor.sonoff_iguana_temperature
+  - platform: min_max
+    name: "Iguana Master Humidity"
+    type: mean
+    entity_ids:
+      - sensor.sonoff_iguana_humidity
+      - sensor.sonoff_iguana_sensor_humidity_aux
