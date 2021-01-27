@@ -1,0 +1,28 @@
+fan:
+  - platform: template
+    fans:
+      iguana_fans:
+        friendly_name: "Iguana Fans"
+        value_template: "{{ states('light.sonoff_iguana_fans') }}"
+        speed_template: >
+          {% set output = {0: "Off", 5: "Low", 40: "Medium", 255: "High"} %}
+          {% set idx = state_attr('light.sonoff_iguana_fans', 'brightness') %}
+          {{ output[idx] }}
+        turn_on:
+          service: homeassistant.turn_on
+          entity_id: light.sonoff_iguana_fans
+        turn_off:
+          service: homeassistant.turn_off
+          entity_id: light.sonoff_iguana_fans
+        set_speed:
+          service: homeassistant.turn_on
+          entity_id: light.sonoff_iguana_fans
+          data_template:
+            brightness: >
+              {% set mapper = {'Off': 0, 'Low': 1, 'Medium': 40, 'High': 255} %}
+              {{ mapper[speed] }}
+        speeds:
+          - "Off"
+          - "Low"
+          - "Medium"
+          - "High"
