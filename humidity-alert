@@ -1,0 +1,19 @@
+alias: (URGENT) Iguana Humidity low (Alert)
+description: ''
+trigger:
+  - platform: numeric_state
+    for: '00:05:00'
+    entity_id: sensor.sonoff_iguana_humidity
+    below: '55'
+condition:
+  - condition: time
+    after: '08:00'
+    before: '20:00'
+action:
+  - service: notify.mobile_app_iphone
+    data:
+      message: 'Iguana Humidifier Empty!, please refil!'
+      data:
+        push:
+          sound: HealthNotificationUrgent.caf
+mode: single
