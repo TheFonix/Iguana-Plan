@@ -1,0 +1,19 @@
+alias: (URGENT) Iguana Temp is low (Alert)
+description: ''
+trigger:
+  - platform: numeric_state
+    for: '00:10:00'
+    below: '26'
+    entity_id: sensor.sonoff_iguana_temperature
+condition:
+  - condition: time
+    after: '08:00'
+    before: '20:00'
+action:
+  - service: notify.mobile_app_iphone
+    data:
+      message: 'Iguana Temperature Fault, Please Investigate!'
+      data:
+        push:
+          sound: HealthNotificationUrgent.caf
+mode: single
