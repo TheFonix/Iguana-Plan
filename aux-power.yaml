@@ -1,0 +1,14 @@
+alias: Iguana Power off
+description: ''
+trigger:
+  - platform: time
+    at: '21:00'
+condition: []
+action:
+  - service: light.turn_off
+    data: {}
+    entity_id: light.extended_color_light_1
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.sonoff_1000e5b11a
+mode: single
