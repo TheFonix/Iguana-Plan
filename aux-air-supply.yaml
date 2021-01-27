@@ -1,0 +1,33 @@
+alias: (Support) - Iguana Fans Mirror
+description: ''
+trigger:
+  - platform: state
+    entity_id: switch.sonoff_iguana_humidifier
+    from: 'on'
+    to: 'off'
+  - platform: state
+    entity_id: switch.sonoff_iguana_humidifier
+    from: 'off'
+    to: 'on'
+condition: []
+action:
+  - choose:
+      - conditions:
+          - condition: state
+            entity_id: switch.sonoff_iguana_humidifier
+            state: 'on'
+        sequence:
+          - service: fan.turn_off
+            data: {}
+            entity_id: fan.iguana_fans
+          - scene: scene.iguana_fans_50
+      - conditions:
+          - condition: state
+            entity_id: switch.sonoff_iguana_humidifier
+            state: 'off'
+        sequence:
+          - service: fan.turn_off
+            data: {}
+            entity_id: fan.iguana_fans
+    default: []
+mode: single
